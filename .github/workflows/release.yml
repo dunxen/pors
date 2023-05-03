@@ -141,7 +141,7 @@ jobs:
         # This is a bit of a mediocre workaround until sigstore/protobuf-specs#48 and related functionality
         # is implemented by Sigstore.
         run: |
-          cosign sign-blob --key env://COSIGN_PRIVATE_KEY --bundle cosign.bundle checksums.txt
+          cosign sign-blob --yes --key env://COSIGN_PRIVATE_KEY --bundle cosign.bundle checksums.txt
       - name: Upload checksums and cosign.bundle
         run: |
           echo "uploading..."
