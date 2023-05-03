@@ -126,7 +126,6 @@ jobs:
           echo "uploaded!"
       - uses: actions/upload-artifact@v3
         with:
-          name: blob-artifacts ${{ matrix.os }}
           path: target/distrib/*
 
   sign-release:
@@ -140,7 +139,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/download-artifact@v3
         with:
-          path: blob-artifacts
+          path: ./artifact
       - uses: sigstore/cosign-installer@main
       - name: Generate and sign checksums.txt
         working-directory: ./blob-artifacts
