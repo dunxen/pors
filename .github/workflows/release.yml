@@ -124,6 +124,10 @@ jobs:
           cat uploads.txt
           gh release upload ${{ github.ref_name }} $(cat uploads.txt)
           echo "uploaded!"
+      - uses: actions/upload-artifact@v3
+        with:
+          name: blob-artifacts ${{ matrix.os }}
+          path: target/distrib/*
 
   sign-release:
     needs: upload-artifacts
@@ -134,17 +138,17 @@ jobs:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v3
-      - name: Generate checksum file
-        run: |
-          sha256sum $(cat uploads.txt) > checksums.txt
+      - uses: actions/download-artifact@v3
+        with:
+          path: blob-artifacts
       - uses: sigstore/cosign-installer@main
-      - name: Sign checksums.txt
+      - name: Generate and sign checksums.txt
+        working-directory: ./blob-artifacts
         # This is a bit of a mediocre workaround until sigstore/protobuf-specs#48 and related functionality
         # is implemented by Sigstore.
         run: |
+          sha256sum $(ls *) > checksums.txt
           cosign sign-blob --yes --key env://COSIGN_PRIVATE_KEY --bundle cosign.bundle checksums.txt
-      - name: Upload checksums and cosign.bundle
-        run: |
           echo "uploading..."
           gh release upload ${{ github.ref_name }} checksums.txt cosign.bundle
           echo "cosign.bundle and checksums.txt uploaded! 🔏"
