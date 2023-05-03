@@ -143,6 +143,7 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: blob-artifacts
+          path: blob-artifacts
       - uses: sigstore/cosign-installer@main
       - name: Generate and sign checksums.txt
         working-directory: blob-artifacts
