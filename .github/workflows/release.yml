@@ -133,6 +133,7 @@ jobs:
       COSIGN_PASSWORD: ${{secrets.COSIGN_PASSWORD}}
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
+      - uses: actions/checkout@v3
       - name: Generate checksum file
         run: |
           sha256sum $(cat uploads.txt) > checksums.txt
