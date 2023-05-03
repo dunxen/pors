@@ -126,6 +126,7 @@ jobs:
           echo "uploaded!"
       - uses: actions/upload-artifact@v3
         with:
+          name: blob-artifacts
           path: target/distrib/*
 
   sign-release:
@@ -139,10 +140,11 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/download-artifact@v3
         with:
-          path: ./artifact
+          name: blob-artifacts
+          path: ./
       - uses: sigstore/cosign-installer@main
       - name: Generate and sign checksums.txt
-        working-directory: ./blob-artifacts
+        working-directory: blob-artifacts
         # This is a bit of a mediocre workaround until sigstore/protobuf-specs#48 and related functionality
         # is implemented by Sigstore.
         run: |
