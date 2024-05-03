@@ -38,7 +38,7 @@ pr-run-mode = "plan"
 # Whether to install an updater program
 install-updater = false
 github-attestations = true
-allow-dirty = true
+allow-dirty = ["ci"]
 
 [workspace.metadata.release]
 pre-release-hook = ["git-cliff", "-o", "CHANGELOG.md", "--tag", "{{version}}"]
