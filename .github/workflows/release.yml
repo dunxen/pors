@@ -136,7 +136,7 @@ jobs:
       - name: Attest zips
         uses: actions/attest-build-provenance@v1
         with:
-          subject-path: 'target/distrib/*.zip'
+          subject-path: 'target/distrib/*${{ join(matrix.targets, ', ') }}*'
       - name: Attest tarballs
         uses: actions/attest-build-provenance@v1
         with:

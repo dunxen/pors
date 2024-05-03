@@ -38,6 +38,7 @@ pr-run-mode = "plan"
 # Whether to install an updater program
 install-updater = false
 github-attestations = true
+# Skip checking whether the specified configuration files are up to date
 allow-dirty = ["ci"]
 
 [workspace.metadata.release]
