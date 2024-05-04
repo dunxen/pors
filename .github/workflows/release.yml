@@ -136,7 +136,7 @@ jobs:
       - name: Attest
         uses: actions/attest-build-provenance@v1
         with:
-          subject-path: "target/distrib/*${{ join(matrix.targets, ', ') }}*"
+          subject-path: "target/distrib/*${{ join(matrix.targets, ', ') }}*.*"
       - id: cargo-dist
         name: Post-build
         # We force bash here just because github makes it really hard to get values up
