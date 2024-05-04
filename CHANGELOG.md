@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.0.18] - 2024-05-04
+
+### ⚙️ Miscellaneous Tasks
+
+- Release pors version 0.0.18
+
 ## [0.0.17] - 2024-05-04
 
 ### ⚙️ Miscellaneous Tasks
